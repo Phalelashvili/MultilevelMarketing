@@ -1,0 +1,49 @@
+﻿@page
+@{
+    ViewBag.Title = "გაყიდვის შეცვლა";
+}
+<h1>@ViewBag.Title</h1>
+
+<form onsubmit="submitForm(this); return false">
+    <label for="id">ID:</label>
+    <input id="id" value="@ViewBag.Model.Id" type="number" disabled/><br/>
+
+    <label for="date">თარიღი:</label>
+    <input id="date" type="datetime-local" value="@ViewBag.Model.Date.ToString("yyyy-MM-ddThh:mm")" required/><br/>
+
+    <label for="distributor">დისტრიბუტორი:</label>
+    <input id="distributor" type="number" value="@ViewBag.Model.Distributor.Id" required/><br/>
+    
+    <label for="product">პროდუქტი:</label>
+    <input id="product" value="@ViewBag.Model.ProductId" required/><br/>
+
+    <label for="price">ღირებულება:</label>
+    <input id="price" type="number" step="0.01" value="@ViewBag.Model.Price" required/><br/>
+
+    <label for="separatePrice">ცალკეული ფასი:</label>
+    <input id="separatePrice" type="number" step="0.01" value="@ViewBag.Model.SeparatePrice" required/><br/>
+    
+    <label for="totalPrice">საერთო ფასი:</label>
+    <input id="totalPrice" type="number" step="0.01" value="@ViewBag.Model.TotalPrice" required/><br/>
+    
+    <input type="submit"/>
+    
+</form>
+<script>
+    function submitForm(form){
+        const url = "https://localhost:5001/api/sales";
+        
+        const data = {
+            "id": Number(form.elements["id"].value),
+            "date": form.elements["date"].value,
+            "distributor": Number(form.elements["distributor"].value),
+            "product": Number(form.elements["product"].value),
+            "price": parseFloat(form.elements["price"].value),
+            "separatePrice": parseFloat(form.elements["separatePrice"].value),
+            "totalPrice": parseFloat(form.elements["totalPrice"].value)
+        }
+        
+        makeRequest("PUT", url, data, swalSuccess, swalError)
+
+    }
+</script>

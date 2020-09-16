@@ -1,0 +1,46 @@
+﻿@page
+@{
+    ViewBag.Title = "გაყიდვის დამატება";
+}
+<h1>@ViewBag.Title</h1>
+
+<form onsubmit="submitForm(this); return false">
+    
+    <label for="date">თარიღი:</label>
+    <input id="date" type="datetime-local" required/><br/>
+
+    <label for="distributor">დისტრიბუტორი:</label>
+    <input id="distributor" type="number" required/><br/>
+    
+    <label for="product">პროდუქტი:</label>
+    <input id="product" required/><br/>
+
+    <label for="price">ღირებულება:</label>
+    <input id="price" type="number" step="0.01" required/><br/>
+
+    <label for="separatePrice">ცალკეული ფასი:</label>
+    <input id="separatePrice" type="number" step="0.01" required/><br/>
+    
+    <label for="totalPrice">საერთო ფასი:</label>
+    <input id="totalPrice" type="number" step="0.01" required/><br/>
+    
+    <input type="submit"/>
+    
+</form>
+<script>
+    function submitForm(form){
+        const url = "https://localhost:5001/api/sales";
+        
+        const data = {
+            "date": form.elements["date"].value,
+            "distributor": Number(form.elements["distributor"].value),
+            "product": Number(form.elements["product"].value),
+            "price": parseFloat(form.elements["price"].value),
+            "separatePrice": parseFloat(form.elements["separatePrice"].value),
+            "totalPrice": parseFloat(form.elements["totalPrice"].value)
+        }
+        
+        makeRequest("POST", url, data, swalSuccess, swalError)
+
+    }
+</script>

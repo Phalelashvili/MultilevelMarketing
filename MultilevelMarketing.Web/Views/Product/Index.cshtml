@@ -1,0 +1,60 @@
+@page
+@{
+    ViewBag.Title = "პროდუქტების მართვა";
+}
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a href="/products/add">პროდუქტის დამატება</a>
+</p>
+
+<table id="products" class="table">
+    <thead>
+    <tr>
+        <th><a>ID</a></th>
+        <th><a>კოდი</a></th>
+        <th><a>სახელი</a></th>
+        <th><a>ფასი</a></th>
+        <th><a>მოქმედებები</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section scripts{
+<script>
+    let table;
+    const buttons = "<button class='btn btn-warning' onclick='redirectToUpdate(this)'>შეცვლა</button>" + 
+                    "<button class='btn btn-danger' onclick='deleteDistributor(this)'>წაშლა</button>";
+    
+    function deleteDistributor(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        $.ajax({
+            url: 'https://localhost:5001/api/products/' + data[0],
+            type: 'DELETE',
+            success: swalSuccess,
+            error: swalError
+        });
+    }
+    
+    function redirectToUpdate(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        window.location.href = "/products/update/" + data[0]; 
+    }
+    
+    $(document).ready(function() {
+        table = $('#products').DataTable({order: [[ 0, "desc" ]]});
+        
+        fetch('https://localhost:5001/api/products').then(r => r.json()).then(response => {
+            for(var i = 0; i < response.length; i++){
+                var product = response[i];
+                            
+                table.row.add([
+                    product.id, product.code, product.name, product.price, buttons
+                ]);   
+            }
+            table.draw();
+        })                
+    } );
+</script>
+}

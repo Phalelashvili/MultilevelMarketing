@@ -1,0 +1,20 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:64277",
+      "sslPort": 44392
+    }
+  },
+  "profiles": {
+    "MultilevelMarketing.Api": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:5001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

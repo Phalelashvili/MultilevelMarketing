@@ -1,0 +1,122 @@
+﻿@page
+@{
+    ViewBag.Title = "დისტრიბუტორის შეცვლა";
+}
+@model MultilevelMarketing.Domain.Models.Distributor
+<h1>@ViewBag.Title</h1>
+
+<form onsubmit="submitForm(this); return false;">
+    <label for="Id">ID:</label>
+    <input id="Id" value="@ViewBag.Model.Id" type="number" disabled/><br/>
+
+    <label for="FirstName">სახელი:</label>
+    <input id="FirstName" value="@ViewBag.Model.FirstName" maxlength="50" required/><br/>
+    
+    <label for="LastName">გვარი:</label>
+    <input id="LastName" value="@ViewBag.Model.LastName" maxlength="50" required/><br/>
+    
+    <label for="BirthDate">დაბ. თარიღი:</label>
+    <input id="BirthDate" value="@ViewBag.Model.BirthDate.ToString("yyyy-MM-ddThh:mm")" type="datetime-local" required/><br/>
+
+    <label for="Sex">სქესი:</label>
+    <select id="Sex" required>
+        <option value="0">მამრობითი</option>
+        <option value="1">მდედრობითი</option>
+    </select><br/>
+
+    <label for="Picture">სურათი:</label>
+    <input type="file" id="Picture"><br/>
+    
+    <h4>პირადობის დამადასტურებელი ინფორმაცია</h4>
+    
+    <label for="DocumentType">საბუთი ტიპი:</label>
+    <select id="DocumentType" required>
+        <option value="0">პირადობის მოწმობა</option>
+        <option value="1">პასპორტი</option>
+    </select><br/>
+
+    <label for="DocumentSerialCode">საბუთის სერია:</label>
+    <input id="DocumentSerialCode" value="@ViewBag.Model.Document.DocumentSerialCode" maxlength="10"><br/>
+
+    <label for="DocumentNumber">საბუთის ნომერი:</label>
+    <input id="DocumentNumber" value="@ViewBag.Model.Document.DocumentNumber" maxlength="10"><br/>
+
+    <label for="DocumentIssueDate">საბუთის გაცემის თარიღი:</label>
+    <input id="DocumentIssueDate" value="@ViewBag.Model.Document.DocumentIssueDate.ToString("yyyy-MM-ddThh:mm")" type="datetime-local" maxlength="10" required><br/>
+
+    <label for="DocumentExpireDate">საბუთის მოქმედების ვადა:</label>
+    <input id="DocumentExpireDate" value="@ViewBag.Model.Document.DocumentExpireDate.ToString("yyyy-MM-ddThh:mm")" type="datetime-local" maxlength="10" required><br/>
+
+    <label for="PersonalNumber">პირადი ნომერი:</label>
+    <input id="PersonalNumber" value="@ViewBag.Model.Document.PersonalNumber" maxlength="50" required><br/>
+
+    <label for="DocumentIssuingAuthority">გამცემი ორგანო:</label>
+    <input id="DocumentIssuingAuthority" value="@ViewBag.Model.Document.DocumentIssuingAuthority" maxlength="100" required><br/>
+
+    <h4>საკონტაქტო ინფორმაცია</h4>
+
+    <label for="ContactType">კონტაქტის ტიპი:</label>
+    <select id="ContactType" required>
+        <option value="0">მობილური ნომერი</option>
+        <option value="1">ელ. ფოსტა</option>
+        <option value="2">ფაქსი</option>
+    </select><br/>
+    
+    <label for="ContactDetails">საკონტაქტო ინფორმაცია:</label>
+    <input id="ContactDetails" value="@ViewBag.Model.Contact.ContactDetails" maxlength="100" required><br/>
+
+    <label for="AddressType">მისამართის ტიპი:</label>
+    <select id="AddressType" required>
+        <option value="0">ფაქტობრივი მისამართი</option>
+        <option value="1">იურიდიული მისამართი</option>
+    </select><br/>
+    
+    <label for="Address">მისამართი:</label>
+    <input id="Address" value="@ViewBag.Model.Address.AddressDetails" maxlength="100" required><br/>
+
+    <label for="Referrer">რეკომენდატორის ID:</label>
+    <input id="Referrer" value="@ViewBag.Model.ReferrerId" type="number" disabled><br/>
+    
+    <input type="submit"/>
+    
+</form>
+@section scripts{
+<script>
+     $('#Sex').val(@ViewBag.Model.Sex);
+     $('#DocumentType').val(@ViewBag.Model.Document.DocumentType);
+     $('#AddressType').val(@ViewBag.Model.Address.AddressType);
+     $('#ContactType').val(@ViewBag.Model.Contact.ContactType);
+
+    function submitForm(form){
+        const url = "https://localhost:5001/api/distributors";
+
+        const data = {
+            "FirstName": form.elements["FirstName"].value,
+            "LastName": form.elements["LastName"].value,
+            "BirthDate": form.elements["BirthDate"].value,
+            "DocumentSerialCode": form.elements["DocumentSerialCode"].value,
+            "DocumentNumber": form.elements["DocumentNumber"].value,
+            "DocumentIssueDate": form.elements["DocumentIssueDate"].value,
+            "DocumentExpireDate": form.elements["DocumentExpireDate"].value,
+            "PersonalNumber": form.elements["PersonalNumber"].value,
+            "DocumentIssuingAuthority": form.elements["DocumentIssuingAuthority"].value,
+            "ContactDetails": form.elements["ContactDetails"].value,
+            "Address": form.elements["Address"].value,
+            "Id": Number(form.elements["Id"].value),
+            "Sex": Number(form.elements["Sex"].value),
+            "DocumentType": Number(form.elements["DocumentType"].value),
+            "ContactType": Number(form.elements["ContactType"].value),
+            "AddressType": Number(form.elements["AddressType"].value),
+        }
+
+        if (form.elements["Picture"].value !== ""){
+            getBase64(form.elements["Picture"].files[0]).then(base64 => {
+                data["Picture"] = base64;
+                makeRequest("PUT", url, data, swalSuccess, swalError)
+            });
+        } else {
+            makeRequest("PUT", url, data, swalSuccess, swalError)
+        }
+    }
+</script>
+}

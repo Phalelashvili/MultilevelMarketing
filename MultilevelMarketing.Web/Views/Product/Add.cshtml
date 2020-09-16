@@ -1,0 +1,34 @@
+﻿@page
+@{
+    ViewBag.Title = "პროდუქტის დამატება";
+}
+<h1>@ViewBag.Title</h1>
+
+<form onsubmit="submitForm(this); return false;">
+    <label for="Code">კოდი:</label>
+    <input id="Code" maxlength="10" required/><br/>
+    
+    <label for="Name">სახელი:</label>
+    <input id="Name" maxlength="100" required/><br/>
+    
+    <label for="Price">ფასი:</label>
+    <input id="Price" type="number" step="0.01" required/><br/>
+
+    <input type="submit"/>
+    
+</form>
+@section scripts{
+    <script>
+    function submitForm(form){
+        const url = "https://localhost:5001/api/products";
+
+        const data = {
+            "Code": form.elements["Code"].value,
+            "Name": form.elements["Name"].value,
+            "Price": parseFloat(form.elements["Price"].value),
+        }
+
+        makeRequest("POST", url, data, swalSuccess, swalError)
+    }
+</script>
+}

@@ -1,0 +1,103 @@
+@page
+@{
+    ViewBag.Title = "გაყიდვების ფილტრი";
+}
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a href="/sales/add">ახალი გაყიდვის დამატება</a><br/>
+    <a href="/sales">უკან დაბრუნება</a>
+</p>
+
+<form onsubmit="filter(this); return false">
+    <label for="distributorId">დისტრიბუტორის ID:</label>
+    <input id="distributorId" type="number"/><br/>
+    
+    <label for="productId">დისტრიბუტორის ID:</label>
+    <input id="productId" type="number"/><br/>
+
+    <label for="startDate">საწყისი თარიღი:</label>
+    <input id="startDate" type="datetime-local"/><br/>
+
+    <label for="endDate">საბოლოო თარიღი:</label>
+    <input id="endDate" type="datetime-local"/><br/>
+    
+    <input type="submit"/>
+    
+</form>
+<table id="sales" class="table">
+    <thead>
+    <tr>
+        <th><a>ID</a></th>
+        <th><a>თარიღი</a></th>
+        <th><a>დისტრიბუტორი</a></th>
+        <th><a>პროდუქტი</a></th>
+        <th><a>ღირებულება</a></th>
+        <th><a>ცალკეული ფასი</a></th>
+        <th><a>საერთო ფასი</a></th>
+        <th><a>მოქმედებები</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section scripts{
+<script>
+    let table;
+    const url = "https://localhost:5001/api/sales/filter";
+    const buttons = "<button class='btn btn-warning' onclick='redirectToUpdate(this)'>შეცვლა</button>" + 
+                    "<button class='btn btn-danger' onclick='deleteSale(this)'>წაშლა</button>";
+            
+    function deleteSale(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        $.ajax({
+            url: url + data[0],
+            type: 'DELETE',
+            success: swalSuccess,
+            error: swalError
+        });
+    }
+
+    function redirectToUpdate(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        window.location.href = "/sales/update/" + data[0]; 
+    }
+
+    function populateTable(response){
+        Swal.fire("", "მოიძებნა " + response.length + " გაყიდვა", "info");
+        table.clear()
+        for(var i = 0; i < response.length; i++){
+            var sale = response[i];
+            var distributor = "";
+            var product = "";
+            
+            if ("distributor" in sale){
+                distributor = sale.distributor.firstName + " " + sale.distributor.lastName + "<br/>ID: " + sale.distributor.id;
+            }
+            if ("product" in sale){
+                product = sale.product.name + "<br/> კოდი: " + sale.product.code;
+            }
+            
+            table.row.add([
+                sale.id, sale.date, distributor, product, sale.price, sale.separatePrice, sale.totalPrice, buttons
+            ]);   
+        }
+        table.draw();
+    }
+    
+    function filter(form){
+        const data = {
+            "distributorId": Number(form.elements["distributorId"].value) || null,
+            "productId": Number(form.elements["productId"].value) || null,
+            "startDate": form.elements["startDate"].value || null,
+            "endDate": form.elements["endDate"].value || null
+        }
+        
+        makeRequest("POST", url, data, (response) => {populateTable(response)}, swalError)   
+    }
+    
+    $(document).ready(function() {
+        table = $('#sales').DataTable({order: [[ 0, "desc" ]]});           
+    } );
+</script>
+}

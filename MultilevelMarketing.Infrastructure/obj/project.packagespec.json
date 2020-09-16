@@ -1,0 +1,64 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj",
+    "projectName": "MultilevelMarketing.Infrastructure",
+    "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj",
+    "outputPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netcoreapp3.1"
+    ],
+    "sources": {
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "projectReferences": {
+          "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj": {
+            "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp3.1": {
+      "dependencies": {
+        "Microsoft.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[3.1.8, )"
+        },
+        "Microsoft.EntityFrameworkCore.Design": {
+          "target": "Package",
+          "version": "[3.1.8, )"
+        },
+        "Microsoft.EntityFrameworkCore.DynamicLinq": {
+          "target": "Package",
+          "version": "[3.2.2, )"
+        }
+      },
+      "imports": [
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ],
+      "assetTargetFallback": true,
+      "warn": true,
+      "frameworkReferences": {
+        "Microsoft.NETCore.App": {
+          "privateAssets": "all"
+        }
+      },
+      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+    }
+  }
+}

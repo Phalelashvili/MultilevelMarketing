@@ -1,0 +1,39 @@
+﻿@page
+@{
+    ViewBag.Title = "ბონუსის გამოთვლა";
+}
+<h1>@ViewBag.Title</h1>
+
+<form action="https://localhost:5001/api/distributors" onsubmit="submitForm(this); return false">
+    <label for="distributor">დისტრიბუტორი:</label>
+    <input id="distributor" type="number" required/><br/>
+    
+    <label for="startDate">საწყისი თარიღი:</label>
+    <input id="startDate" type="datetime-local" required/><br/>
+
+    <label for="endDate">საბოლოო თარიღი:</label>
+    <input id="endDate" type="datetime-local" required/><br/>
+    
+    <input type="submit"/>
+    
+</form>
+<script>
+    function submitForm(form){
+        const url = "https://localhost:5001/api/bonuscalculator";
+        
+        const data = {
+            "distributor": Number(form.elements["distributor"].value),
+            "startDate": form.elements["startDate"].value,
+            "endDate": form.elements["endDate"].value
+        }
+        
+        makeRequest("POST", url, data, function(response){
+            var msg = "ჯამური ბონუსი: " + response.totalBonus;
+            for(var i = 0; i < response.referralBonuses.length; i++){
+                msg += "<br/>" + (i + 1) + " დონის რეფერალების ბონუსი: " + response.referralBonuses[i]
+            }
+            Swal.fire("შესრულდა", msg, "info")
+        }, swalError)
+
+    }
+</script>

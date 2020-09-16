@@ -1,0 +1,39 @@
+﻿@page
+@{
+    ViewBag.Title = "პროდუქტის შეცვლა";
+}
+@model MultilevelMarketing.Domain.Models.Distributor
+<h1>@ViewBag.Title</h1>
+
+<form onsubmit="submitForm(this); return false;">
+    <label for="Id">ID:</label>
+    <input id="Id" value="@ViewBag.Model.Id" type="number" disabled/><br/>
+
+    <label for="Code">კოდი:</label>
+    <input id="Code" value="@ViewBag.Model.Code" maxlength="10" required/><br/>
+    
+    <label for="Name">სახელი:</label>
+    <input id="Name" value="@ViewBag.Model.Name" maxlength="100" required/><br/>
+    
+    <label for="Price">ფასი:</label>
+    <input id="Price" value="@ViewBag.Model.Price" type="number" step="0.01" required/><br/>
+
+    <input type="submit"/>
+    
+</form>
+@section scripts{
+<script>
+    function submitForm(form){
+        const url = "https://localhost:5001/api/products";
+
+        const data = {
+            "Id": Number(form.elements["Id"].value),
+            "Code": form.elements["Code"].value,
+            "Name": form.elements["Name"].value,
+            "Price": parseFloat(form.elements["Price"].value)
+        }
+
+        makeRequest("PUT", url, data, swalSuccess, swalError)
+    }
+</script>
+}

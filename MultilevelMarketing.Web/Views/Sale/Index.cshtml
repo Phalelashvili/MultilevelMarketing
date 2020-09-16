@@ -1,0 +1,73 @@
+@page
+@{
+    ViewBag.Title = "გაყიდვების მართვა";
+}
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a href="/sales/add">ახალი გაყიდვის დამატება</a><br/>
+    <a href="/sales/filter">გაყიდვების ფილტრი</a>
+</p>
+
+<table id="sales" class="table">
+    <thead>
+    <tr>
+        <th><a>ID</a></th>
+        <th><a>თარიღი</a></th>
+        <th><a>დისტრიბუტორი</a></th>
+        <th><a>პროდუქტი</a></th>
+        <th><a>ღირებულება</a></th>
+        <th><a>ცალკეული ფასი</a></th>
+        <th><a>საერთო ფასი</a></th>
+        <th><a>მოქმედებები</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section scripts{
+<script>
+    let table;
+    const buttons = "<button class='btn btn-warning' onclick='redirectToUpdate(this)'>შეცვლა</button>" + 
+                    "<button class='btn btn-danger' onclick='deleteSale(this)'>წაშლა</button>";
+    
+    function deleteSale(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        $.ajax({
+            url: 'https://localhost:5001/api/sales/' + data[0],
+            type: 'DELETE',
+            success: swalSuccess,
+            error: swalError
+        });
+    }
+
+    function redirectToUpdate(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        window.location.href = "/sales/update/" + data[0]; 
+    }
+
+    $(document).ready(function() {
+        table = $('#sales').DataTable({order: [[ 0, "desc" ]]});
+        
+        fetch('https://localhost:5001/api/sales').then(r => r.json()).then(response => {
+            for(var i = 0; i < response.length; i++){
+                var sale = response[i];
+                var distributor = "";
+                var product = "";
+                
+                if ("distributor" in sale){
+                    distributor = sale.distributor.firstName + " " + sale.distributor.lastName + "<br/>ID: " + sale.distributor.id;
+                }
+                if ("product" in sale){
+                    product = sale.product.name + "<br/> კოდი: " + sale.product.code;
+                }
+                
+                table.row.add([
+                    sale.id, sale.date, distributor, product, sale.price, sale.separatePrice, sale.totalPrice, buttons
+                ]);   
+            }
+            table.draw();
+        })                
+    } );
+</script>
+}

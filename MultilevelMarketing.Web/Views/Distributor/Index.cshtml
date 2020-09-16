@@ -1,0 +1,69 @@
+@page
+@{
+    ViewBag.Title = "დისტრიბუტორების მართვა";
+}
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a href="/distributors/register">დისტრიბუტორის რეგისტრაცია</a>
+</p>
+
+<table id="distributors" class="table">
+    <thead>
+    <tr>
+        <th><a>ID</a></th>
+        <th><a>სახელი</a></th>
+        <th><a>გვარი</a></th>
+        <th><a>დაბ. თარიღი</a></th>
+        <th><a>სურათი</a></th>
+        <th><a>პირადი ნომერი</a></th>
+        <th><a>საკონტაქტო ინფორმაცია</a></th>
+        <th><a>მისამართი</a></th>
+        <th><a>მოქმედებები</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section scripts{
+<script>
+    let table;
+    const buttons = "<button class='btn btn-warning' onclick='redirectToUpdate(this)'>შეცვლა</button>" + 
+                    "<button class='btn btn-danger' onclick='deleteDistributor(this)'>წაშლა</button>";
+    
+    function deleteDistributor(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        $.ajax({
+            url: 'https://localhost:5001/api/distributors/' + data[0],
+            type: 'DELETE',
+            success: swalSuccess,
+            error: swalError
+        });
+    }
+    
+    function redirectToUpdate(dom){
+        var data = table.row($(dom).parents('tr') ).data();
+        window.location.href = "/distributors/update/" + data[0]; 
+    }
+    
+    $(document).ready(function() {
+        table = $('#distributors').DataTable({order: [[ 0, "desc" ]]});
+        
+        fetch('https://localhost:5001/api/distributors').then(r => r.json()).then(response => {
+    
+            for(var i = 0; i < response.length; i++){
+                var distributor = response[i];
+                var address = "ტიპი: " + distributor.address.addressType + "<br/>" + distributor.address.addressDetails;
+                var contactInfo = "ტიპი: " + distributor.contact.contactType + "<br/>" + distributor.contact.contactDetails;
+
+                table.row.add([
+                    distributor.id, distributor.firstName, distributor.lastName, distributor.birthDate,
+                    "<img style='max-width: 64px' src='data:image/png;base64," + distributor.picture + "'>",
+                    distributor.document.personalNumber, contactInfo, address, buttons
+                ]);   
+            }
+            table.draw();
+        })                
+    } );
+</script>
+}

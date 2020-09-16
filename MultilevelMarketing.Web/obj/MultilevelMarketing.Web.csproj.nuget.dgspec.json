@@ -1,0 +1,273 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Web/MultilevelMarketing.Web.csproj": {}
+  },
+  "projects": {
+    "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Application/MultilevelMarketing.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Application/MultilevelMarketing.Application.csproj",
+        "projectName": "MultilevelMarketing.Application",
+        "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Application/MultilevelMarketing.Application.csproj",
+        "packagesPath": "/home/phalelashvili/.nuget/packages/",
+        "outputPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/phalelashvili/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj": {
+                "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj",
+        "projectName": "MultilevelMarketing.Domain",
+        "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj",
+        "packagesPath": "/home/phalelashvili/.nuget/packages/",
+        "outputPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/phalelashvili/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "NetDevPack": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj",
+        "projectName": "MultilevelMarketing.Infrastructure",
+        "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj",
+        "packagesPath": "/home/phalelashvili/.nuget/packages/",
+        "outputPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/phalelashvili/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj": {
+                "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.DynamicLinq": {
+              "target": "Package",
+              "version": "[3.2.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Web/MultilevelMarketing.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Web/MultilevelMarketing.Web.csproj",
+        "projectName": "MultilevelMarketing.Web",
+        "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Web/MultilevelMarketing.Web.csproj",
+        "packagesPath": "/home/phalelashvili/.nuget/packages/",
+        "outputPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/phalelashvili/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Application/MultilevelMarketing.Application.csproj": {
+                "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Application/MultilevelMarketing.Application.csproj"
+              },
+              "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj": {
+                "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Domain/MultilevelMarketing.Domain.csproj"
+              },
+              "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj": {
+                "projectPath": "/home/phalelashvili/RiderProjects/MultilevelMarketing/MultilevelMarketing.Infrastructure/MultilevelMarketing.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
